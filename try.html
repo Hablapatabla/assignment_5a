@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<title>Amicable Numbers</title>
+
+	<script>
+
+		function extractData() {
+			var user_first = document.getElementById("first").value;
+			var user_second = document.getElementById("second").value;
+			console.log(user_first + " " + user_second);
+
+			document.write("Your first number: " + user_first + "<br>");
+			document.write("Your second number: " + user_second + "<br><br>");
+			isAmicable(user_first, user_second);
+		}
+
+		//function testIsFactor() {
+		//	if(isFactor(2, 1)) {
+		//		document.write("isFactor test 1 passed<br>");
+		//	}
+		//
+		//	if(isFactor(2000, 10)) {
+        //		document.write("isFactor test 2 passed<br>");
+		//	}
+		//
+		//	if(!isFactor(7, 2)) {
+		//		document.write("isFactor test 3 passed<br>");
+		//	}
+		//}
+
+		function isFactor(number, factor) {
+			if(number % factor == 0) {
+				return true;
+			} 
+			return false;
+		}
+
+
+		// function testShowFactors() {
+		// 	var test = new Array(1, 2, 3, 4, 5);
+		// 	document.write(showFactors(test));
+		// }
+
+		function showFactors(test) {
+			for(var i = 0; i < test.length; ++i) {
+				document.write(test[i] + " ");
+			}
+			document.write("<br>");
+		}
+
+		// function testAddFactors() {
+		// 	var test = getFactors(100);
+		// 	var sum = addFactors(test);
+		// 	document.write("<br>" + sum);
+		// }
+
+		function addFactors(test) {
+			var total = 0;
+			for(var i = 0; i < test.length; ++i) {
+				total += test[i];
+			}
+			return total;
+		}
+
+		// function testGetFactors() {
+		// 	getFactors(16);
+		// 	getFactors(100);
+		// }
+
+		function getFactors(num) {
+			var half = Math.floor(num / 2), // Ensures a whole number <= num.
+        				str = "",
+        				i = 1;
+
+		  	for(i; i <= half; ++i) {
+		  		if(isFactor(num, i)) {
+		  			str += i + ',';
+		  		}
+		  	}
+
+		    str = str.substring(0, str.length - 1);
+		    
+		    var result = str.split(",").map(Number);
+		    return result;
+		}
+
+		function isAmicable(first, second) {
+			var first_factors = getFactors(first);
+			document.write("Factors of " + first + ": ");
+			showFactors(first_factors);
+			var sum_first = addFactors(first_factors);
+			document.write("The sum of these factors is: " + sum_first + "<br><br>");
+
+			var second_factors = getFactors(second);
+			document.write("Factors of " + second + ": ");
+			showFactors(second_factors);
+			var sum_second = addFactors(second_factors);
+			document.write("The sum of these factors is: " + sum_second + "<br><br>");
+
+			if((sum_first == second) && (sum_second == first)) {
+				document.write("These numbers are amicable!");
+			} else {
+				document.write("These numbers are NOT amicable.");
+			}
+		}
+
+	</script>
+
+</head>
+
+<body>
+	<h1>Amicable Number Calculator!</h1>
+	<p>If you do not input anything in an entry box, it will default to 0.</p>
+	<form>
+		<label>First Number</label>
+		<input type="text" id="first">
+		<label>Second Number</label>
+		<input type="text" id="second">
+
+		<button type="button" onclick="extractData()">Submit</button>
+	</form>
+</body>
+</html>
